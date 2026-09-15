@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "checked_mesh_subintervals": [
+    8,
+    16
+  ],
+  "information_loss_exact": "205859933299369/2500000000000000",
+  "information_loss_decimal": "0.0823439733197476",
+  "conditional_sandwich_checks": 1047,
+  "conditional_action_checks": 3711,
+  "strict_action_screening_checks": 1474,
+  "gaussian_check": {
+    "check": "gaussian_value_and_smooth_threshold_expansion",
+    "status": "passed",
+    "gaussian_value_at_cost_3": 0.000764308634095455,
+    "retained_fraction": 0.0009579188163841335,
+    "small_error_coefficients": [
+      0.24197005372094096,
+      0.24197068253133508,
+      0.24197072189391997
+    ],
+    "limiting_coefficient": 0.24197072451914337
+  }
+}
