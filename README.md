@@ -1,31 +1,29 @@
-# Quoting Under a Misspecified Fill Law
+# Market Microstructure Trilogy — Paper II
 
-**Miquel Noguer Alonso**  
-Artificial Intelligence Finance Institute (AIFI)
+**Quoting Under a Misspecified Fill Law**  
+DOI: <https://doi.org/10.5281/zenodo.22759528>  
+Fixed manuscript date: **15 September 2026**
 
-A theory of order-book queues, adverse selection, partial fills, cancellation latency, inventory control, and performance certificates under fill-law misspecification.
+The main document is `p2_quoting.tex`. Compile it with pdfLaTeX and BibTeX;
+`latexmk -pdf p2_quoting.tex` performs the required passes. The bibliography,
+generated `.bbl`, five publication-resolution PNG figures, and every file
+needed to compile the deposited PDF are included.
 
-- DOI: [10.5281/zenodo.22759528](https://doi.org/10.5281/zenodo.22759528)
-- Overleaf: [editable project](https://www.overleaf.com/project/6aa88afd2bbfb3fcaf953981)
-- Manuscript: [`paper.pdf`](paper.pdf)
-- LaTeX: [`paper.tex`](paper.tex)
+The figures are deterministic and use no market data. After installing the
+packages in `verification/requirements.txt`, they can be regenerated with:
 
-## Repository contents
+    python verification/generate_manuscript_figures.py --paper 2 --output figures
 
-This private repository is part 2 of the *Market Microstructure Trilogy*. It contains the reviewed manuscript, its LaTeX source, and the corresponding source and verification archive. The manuscript uses author-year citations and includes a table of contents.
+`Trilogy_Citations.bib` contains the definitive BibTeX records for all three
+papers. The trilogy uses a fixed star citation architecture: Paper II cites
+Paper I and does not cite Paper III.
 
-## Build
+## Repository downloads
 
-The manuscript was built with pdfLaTeX. For Papers II and III, run BibTeX between LaTeX passes.
+- [Final PDF](paper.pdf)
+- [Complete manuscript source](Quoting_Under_a_Misspecified_Fill_Law_Source.zip)
+- [Editable Overleaf project](https://www.overleaf.com/project/6aa88afd2bbfb3fcaf953981)
 
-```bash
-latexmk -pdf paper.tex
-```
-
-## Verification status
-
-The released PDF was reproduced from the included source on 15 September 2026. The Overleaf build completed with zero errors and zero warnings. Numerical and symbolic checks are contained in the accompanying verification archive.
-
-## Scope
-
-The guarantees in the paper are conditional on the declared models, information sets, and uncertainty bounds. Synthetic calculations verify the stated identities and certificates; they do not claim live-market profitability.
+The repository entry point `paper.tex` is identical to `p2_quoting.tex`.
+`trilogy-source-supplement.zip` is an alias of the current manuscript source archive.
+`verification-suite.zip` contains the current verification scripts and figure generator.
