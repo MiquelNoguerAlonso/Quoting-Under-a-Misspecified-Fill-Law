@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite the Zenodo record."
+title: "Quoting Under a Misspecified Fill Law"
+type: article
+authors:
+  - family-names: "Noguer Alonso"
+    given-names: "Miquel"
+doi: "10.5281/zenodo.22759528"
+date-released: 2026-09-15
+url: "https://doi.org/10.5281/zenodo.22759528"
