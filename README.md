@@ -9,21 +9,26 @@ The main document is `p2_quoting.tex`. Compile it with pdfLaTeX and BibTeX;
 generated `.bbl`, five publication-resolution PNG figures, and every file
 needed to compile the deposited PDF are included.
 
-The figures are deterministic and use no market data. After installing the
-packages in `verification/requirements.txt`, they can be regenerated with:
+The included verification suite is deterministic and uses no market data.
+Install its pinned Python dependencies and run all 41 check groups with:
+
+    python -m pip install -r verification/requirements.txt
+    python verification/verify_theory.py
+
+The command stops on a failed assertion and rewrites
+`verification/verification_results.json`. The five figures can then be
+regenerated with:
 
     python verification/generate_manuscript_figures.py --paper 2 --output figures
+
+Recompile after regeneration to reproduce the deposited PDF.
 
 `Trilogy_Citations.bib` contains the definitive BibTeX records for all three
 papers. The trilogy uses a fixed star citation architecture: Paper II cites
 Paper I and does not cite Paper III.
 
-## Repository downloads
+`MANIFEST_SHA256.txt` inventories every other file in the source archive. On
+systems with GNU Coreutils, verify it before regeneration with
+`sha256sum -c MANIFEST_SHA256.txt`.
 
-- [Final PDF](paper.pdf)
-- [Complete manuscript source](Quoting_Under_a_Misspecified_Fill_Law_Source.zip)
-- [Editable Overleaf project](https://www.overleaf.com/project/6aa88afd2bbfb3fcaf953981)
-
-The repository entry point `paper.tex` is identical to `p2_quoting.tex`.
-`trilogy-source-supplement.zip` is an alias of the current manuscript source archive.
-`verification-suite.zip` contains the current verification scripts and figure generator.
+The final release audit is recorded in `SUBMISSION_REVIEW_2026-09-15.md`.

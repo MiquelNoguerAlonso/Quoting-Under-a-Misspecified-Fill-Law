@@ -1,4 +1,8 @@
 \documentclass[11pt]{article}
+% Keep release builds byte-stable by omitting volatile engine timestamps and IDs.
+\ifdefined\pdfinfoomitdate\pdfinfoomitdate=1\fi
+\ifdefined\pdftrailerid\pdftrailerid{}\fi
+\ifdefined\pdfsuppressptexinfo\pdfsuppressptexinfo=-1\fi
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
@@ -12,7 +16,8 @@
 \hypersetup{
 pdftitle={Quoting Under a Misspecified Fill Law},
 pdfauthor={Miquel Noguer Alonso},
-pdfsubject={Order-book queues, adverse selection, and inventory-control certificates. DOI: 10.5281/zenodo.22759528}}
+pdfsubject={Order-book queues, adverse selection, and inventory-control certificates. DOI: 10.5281/zenodo.22759528},
+pdfkeywords={market making, order-book queues, adverse selection, inventory control, model misspecification}}
 \setlength{\emergencystretch}{3em}
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]

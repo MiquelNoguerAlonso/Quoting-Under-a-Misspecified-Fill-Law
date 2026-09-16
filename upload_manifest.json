@@ -1,0 +1,13 @@
+{
+  "paper": 2,
+  "repository": "Quoting-Under-a-Misspecified-Fill-Law",
+  "private": true,
+  "main_source": "p2_quoting.tex",
+  "pages": 39,
+  "png_figures": 5,
+  "verification_groups": 41,
+  "pdf_sha256": "0a07c39c8bf08c4c047e13da6d4c334959e1467e20159dc68a1ead991f7ed2c7",
+  "source_archive_sha256": "61dce2e96d1bc7dd5f08c353750f0799501afdc8aa45ebfcc2f24e4517296a0c",
+  "full_source_tree_in_repository": true,
+  "doi": "10.5281/zenodo.22759528"
+}
