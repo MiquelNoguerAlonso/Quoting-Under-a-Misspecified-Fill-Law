@@ -30,6 +30,7 @@ def release_files():
     out=[]
     for p in ROOT.rglob('*'):
         if not p.is_file():continue
+        if p.name.startswith('SUBMISSION_REVIEW_'):continue
         rel=p.relative_to(ROOT)
         if any(part in {'.git','__pycache__','.lake'} for part in rel.parts):continue
         if rel.as_posix() in {'MANIFEST_SHA256.txt','upload_manifest.json'}:continue
