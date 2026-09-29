@@ -1,0 +1,56 @@
+{
+  "filled": 3,
+  "reservation_on_request": 6,
+  "final_reserved": 0,
+  "trace": [
+    {
+      "time": 1,
+      "event": "exchange_accept",
+      "available": {}
+    },
+    {
+      "time": 2,
+      "event": "accept_report",
+      "available": {}
+    },
+    {
+      "time": 2,
+      "event": "send_cancel",
+      "available": {}
+    },
+    {
+      "time": 3,
+      "event": "exchange_trade",
+      "available": {}
+    },
+    {
+      "time": 4,
+      "event": "fill_report",
+      "available": {}
+    },
+    {
+      "time": 5,
+      "event": "exchange_cancel",
+      "available": {}
+    },
+    {
+      "time": 5,
+      "event": "local_decision",
+      "available": {}
+    },
+    {
+      "time": 6,
+      "event": "receipt:book",
+      "available": {
+        "book": 101
+      }
+    },
+    {
+      "time": 7,
+      "event": "cancel_terminal",
+      "available": {
+        "book": 101
+      }
+    }
+  ]
+}

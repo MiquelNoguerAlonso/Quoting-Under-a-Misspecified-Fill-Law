@@ -1,0 +1,24 @@
+{
+  "status": "all_passed",
+  "data": "Synthetic finite and exact rational checks; no market data.",
+  "results": [
+    {
+      "check": "attainable_latency_loss",
+      "exact_laws": 1001,
+      "supremum": "3/4",
+      "near_supremum_gap": "1/2666666668"
+    },
+    {
+      "check": "symmetric_equilibrium",
+      "player_counts": 8,
+      "max_discrepancy": 2.220446049250313e-16
+    },
+    {
+      "check": "event_history_to_certified_position",
+      "cases": 378,
+      "smallest_history_likelihood": "3/8",
+      "max_optimizer_gap": 1.3877787807814457e-17,
+      "noise_variance_proxy": "d^2 by conditional Hoeffding"
+    }
+  ]
+}

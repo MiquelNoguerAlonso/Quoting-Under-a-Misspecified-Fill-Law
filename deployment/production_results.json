@@ -1,0 +1,70 @@
+{
+  "data": "Synthetic mathematical and normalized event-model checks; no market data or hardware measurements.",
+  "seed": 20260928,
+  "checks": [
+    {
+      "name": "lifecycle_and_queue",
+      "status": "passed",
+      "checks": 14,
+      "filled": 3,
+      "reservation_on_request": 6,
+      "final_reserved": 0
+    },
+    {
+      "name": "integer_allocation_and_viability",
+      "status": "passed",
+      "allocation_cases": 2800,
+      "capacity_cases": 3146,
+      "integer_cost": 8.5,
+      "continuous_cost": 8.333333333333334,
+      "gap": "1/6"
+    },
+    {
+      "name": "finite_horizon_transfer",
+      "status": "passed",
+      "random_models": 200,
+      "maximum_loss_bound_ratio": 0.11459733268909529,
+      "largest_violation": -0.5743022175310073
+    },
+    {
+      "name": "finite_sample_coverage",
+      "status": "passed",
+      "exact_binomial_cases": 76,
+      "largest_failure_probability": 0.0005398871249023434
+    },
+    {
+      "name": "compiled_scores_and_latency_tail",
+      "status": "passed",
+      "message_cases": 1000,
+      "largest_violation": -0.0022235711437268435,
+      "constant_delay_payoff": 0,
+      "mixture_delay_payoff": -0.3,
+      "mean_delay": 0.5
+    },
+    {
+      "name": "robust_joint_moments",
+      "status": "passed",
+      "rational_grid_actions": 13,
+      "max_lp_error": 1.0408340855860843e-17,
+      "random_moment_families": 120,
+      "fill_box_checks": 100,
+      "largest_dense_grid_gap": 1.1147135847624362e-08,
+      "robust_continuous_order": 0.1,
+      "robust_continuous_gain": 0.00025,
+      "robust_grid_order": 0.08,
+      "robust_grid_gain": 0.00024
+    },
+    {
+      "name": "random_fill_noise_and_off_policy_identity",
+      "status": "passed",
+      "joint_laws": 150,
+      "mgf_values": 4650,
+      "max_mgf_violation": 2.2204460492503128e-16,
+      "enumerated_paths": 4096,
+      "boundary_crossing_probability": 0.01171875,
+      "importance_weighted_value": 0.325
+    }
+  ],
+  "status": "all_passed",
+  "numpy_version": "2.3.5"
+}
