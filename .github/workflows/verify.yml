@@ -1,0 +1,40 @@
+name: Verify mathematics and manuscript
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: verification/requirements.txt
+      - name: Install TeX and PDF tools
+        run: sudo apt-get update && sudo apt-get install -y latexmk texlive-latex-extra texlive-fonts-recommended texlive-science poppler-utils
+      - name: Install numerical dependencies
+        run: python -m pip install -r verification/requirements.txt
+      - name: Check delivered files and archives
+        run: python scripts/release.py --check
+      - name: Reproduce existing results
+        run: python verification/verify_theory.py
+      - name: Check certified improvement extension
+        run: python verification/certified_improvement.py
+      - name: Check joint-event realism extension
+        run: python verification/realism_stress.py
+      - name: Check production-bridge results
+        run: python deployment/verify_production.py
+      - name: Check latency, equilibrium and robust positions
+        run: python deployment/verify_additional.py
+      - name: Build and verify a coherent release
+        run: python scripts/release.py --build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: verified-manuscript
+          path: |
+            paper.pdf
+            *source*.zip
+            MANIFEST_SHA256.txt
+            upload_manifest.json
