@@ -102,6 +102,8 @@ def check_dynamic_market_making():
                            atol=2e-12, dense_output=True, max_step=0.02)
     assert evaluation.success
     minimum_m = [math.inf]
+    minimum_margin = [math.inf]
+    margin_node_evaluations = [0]
 
     def forward(t, state):
         value, fit = h.sol(t), hhat.sol(t)
@@ -116,6 +118,10 @@ def check_dynamic_market_making():
                 d = ahat[i, side]
                 p = value[i] - value[j] + true["mark"]
                 phat = fit[i] - fit[j] + estimated["mark"]
+                margin = p + 2 / true["kappa"] - upper
+                minimum_margin[0] = min(minimum_margin[0], margin)
+                margin_node_evaluations[0] += 1
+                assert margin > 0
                 lam = true["lambdas"][side] * math.exp(-true["kappa"] * d)
                 lamhat = estimated["lambdas"][side] * math.exp(-estimated["kappa"] * d)
                 residual = (lam * (1 - true["kappa"] * (d-p))
@@ -135,6 +141,18 @@ def check_dynamic_market_making():
     occupancy = solve_ivp(forward, (0, T), start, rtol=2e-9, atol=2e-11,
                           max_step=0.01)
     assert occupancy.success
+    # Include endpoints and a fixed 1001-node grid, independently of the
+    # adaptive forward solver's chosen evaluation times.
+    for node in np.linspace(0.0, T, 1001):
+        value = h.sol(node)
+        for i in range(len(qs)):
+            for side, j in enabled(i):
+                margin = value[i] - value[j] + true["mark"] + 2 / true["kappa"] - upper
+                minimum_margin[0] = min(minimum_margin[0], float(margin))
+                margin_node_evaluations[0] += 1
+                assert margin > 0
+    table = Path(__file__).resolve().parents[1] / "tables" / "curvature_margin.tex"
+    table.write_text(f"{minimum_margin[0]:.10f}%\n")
     integrated_gap, certificate = occupancy.y[-2:, -1]
     direct_regret = float(h.sol(0)[2] - evaluation.sol(0)[2])
     assert abs(direct_regret - integrated_gap) < 2e-7
@@ -144,6 +162,9 @@ def check_dynamic_market_making():
            direct_regret=direct_regret, integrated_hamiltonian_gap=float(integrated_gap),
            integrated_gradient_certificate=float(certificate),
            minimum_concavity_modulus=minimum_m[0],
+           minimum_concavity_margin=minimum_margin[0],
+           margin_node_side_evaluations=margin_node_evaluations[0],
+           curvature_scope="numerical node check, not an interval proof",
            identity_absolute_error=abs(direct_regret-float(integrated_gap)))
 
 

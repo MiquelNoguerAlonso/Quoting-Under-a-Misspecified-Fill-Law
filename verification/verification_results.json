@@ -26,6 +26,9 @@
       "integrated_hamiltonian_gap": 0.0012786965192769968,
       "integrated_gradient_certificate": 0.0034406857396006665,
       "minimum_concavity_modulus": 0.24727259139028426,
+      "minimum_concavity_margin": 0.28506038722354243,
+      "margin_node_side_evaluations": 13016,
+      "curvature_scope": "numerical node check, not an interval proof",
       "identity_absolute_error": 1.2819796706402958e-09
     },
     {

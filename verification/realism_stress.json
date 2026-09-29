@@ -1,0 +1,10 @@
+{
+  "synthetic_only": true,
+  "independent_gain": 0.2,
+  "worst_gain": -0.1,
+  "best_gain": 0.4,
+  "switch_theta": 0.6666666666666666,
+  "lp_checks": 242,
+  "exact_mixture_cases": 101,
+  "max_lp_error": 1.942890293094024e-16
+}
