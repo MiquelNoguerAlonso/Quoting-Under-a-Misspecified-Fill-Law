@@ -1,13 +1,18 @@
 {
   "paper": 2,
   "repository": "Quoting-Under-a-Misspecified-Fill-Law",
-  "private": true,
+  "private": false,
+  "manuscript_date": "2026-09-28",
   "main_source": "p2_quoting.tex",
-  "pages": 39,
-  "png_figures": 5,
-  "verification_groups": 41,
-  "pdf_sha256": "0a07c39c8bf08c4c047e13da6d4c334959e1467e20159dc68a1ead991f7ed2c7",
-  "source_archive_sha256": "61dce2e96d1bc7dd5f08c353750f0799501afdc8aa45ebfcc2f24e4517296a0c",
+  "pages": 51,
+  "png_figures": 7,
+  "pdf_sha256": "f4cc5ea8971b42ed5c53fce0b8b9ef3170bd550715f210de6060f4d0ea897c14",
+  "source_archive": "trilogy-source-supplement.zip",
+  "source_archive_sha256": "3b28eae2393ef13c0145d5cd731eeaf431fddc10cd219a4176756b426bbe0eaa",
+  "manifest_sha256": "726f017a73efb2484777441a6b7d310a87b814a3f9891671b04f18a3c6d57fa8",
   "full_source_tree_in_repository": true,
-  "doi": "10.5281/zenodo.22759528"
+  "original_deposit_doi": "10.5281/zenodo.22759528",
+  "doi": "10.5281/zenodo.23027598",
+  "doi_deposit_updated": false,
+  "data": "Synthetic mathematical experiments; no market data."
 }

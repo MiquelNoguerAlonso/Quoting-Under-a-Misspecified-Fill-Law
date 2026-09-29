@@ -1,0 +1,30 @@
+{
+  "revision_version": 3,
+  "revision_date": "2026-09-25",
+  "base_v2_commit": "3d3ece267129c6b689ccdeedef02dd71c9f2c5db",
+  "v2_pdf_pages": 44,
+  "v3_pdf_pages": 47,
+  "new_section": "13",
+  "new_section_pages": "42--45",
+  "added_result_statements_this_revision": 1,
+  "latex_errors": 0,
+  "unresolved_references": 0,
+  "overfull_boxes": 0,
+  "visual_review": "Title page and complete new section rendered and inspected.",
+  "new_numerical_checks": {
+    "synthetic_only": true,
+    "independent_gain": 0.2,
+    "worst_gain": -0.1,
+    "best_gain": 0.4,
+    "switch_theta": 0.6666666666666666,
+    "lp_checks": 242,
+    "exact_mixture_cases": 101,
+    "max_lp_error": 1.942890293094024e-16
+  },
+  "previous_checks": "The v2 verification remains recorded in REVISION_2026-09-24.md; the unchanged full suite was not rerun for this additive v3 revision.",
+  "market_data_used": false,
+  "remote_ci_executed": false,
+  "github_published": false,
+  "doi_deposit_updated": false,
+  "new_lean_proofs": false
+}

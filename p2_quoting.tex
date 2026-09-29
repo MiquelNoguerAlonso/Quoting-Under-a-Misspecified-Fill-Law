@@ -16,11 +16,12 @@
 \hypersetup{
 pdftitle={Quoting Under a Misspecified Fill Law},
 pdfauthor={Miquel Noguer Alonso},
-pdfsubject={Order-book queues, adverse selection, and inventory-control certificates. DOI: 10.5281/zenodo.22759528},
+pdfsubject={Order-book queues, adverse selection, and inventory-control certificates. DOI: 10.5281/zenodo.23027598},
 pdfkeywords={market making, order-book queues, adverse selection, inventory control, model misspecification}}
 \setlength{\emergencystretch}{3em}
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
+\newtheorem{classical}[theorem]{Classical result}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{lemma}[theorem]{Lemma}
@@ -30,6 +31,7 @@ pdfkeywords={market making, order-book queues, adverse selection, inventory cont
 \newtheorem{example}[theorem]{Example}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
+\newtheorem*{remarkplain}{Remark}
 \newcommand{\E}{\mathbb E}
 \newcommand{\R}{\mathbb R}
 \newcommand{\dd}{\,\mathrm d}
@@ -47,41 +49,44 @@ Order-Book Queues, Adverse Selection,\\
 and Inventory-Control Certificates}
 \author{Miquel Noguer Alonso\\
 \small Artificial Intelligence Finance Institute}
-\date{15 September 2026\\[5pt]\small DOI:
-\href{https://doi.org/10.5281/zenodo.22759528}{10.5281/zenodo.22759528}}
+\date{28 September 2026\\[5pt]\small DOI:
+\href{https://doi.org/10.5281/zenodo.23027598}{10.5281/zenodo.23027598}}
+\makeatletter
+\newcommand{\inputtable}[1]{\@@input#1 }
+\makeatother
 \begin{document}
 \maketitle
 \begin{abstract}
-A market maker's fill law depends on price, tagged queue priority,
-order size, order flow, and price changes accompanying execution.
-This paper connects uncertainty in these book primitives to the
-loss of a deployed quoting policy. A marked-wealth identity separates
-offset capture, carried-inventory drift, and simultaneous fill--price
-jumps. A finite event model retains inventory reservations, batch
-consumption, partial fills, and costly replacement. A pending
-cancellation remains executable until acknowledgement. Its value
-admits an exact residual identity and a perturbation bound in the
-delay law. Approximating a deterministic delay by mean-matched
-Erlang stages has a sharp inverse-stage value-error rate, with an
-explicit leading term and remainder.
-A performance-difference identity transfers local decision errors
-into total policy loss. Smooth quote branches admit quadratic
-certificates accounting for primitive uncertainty, continuation
-values, HJB residuals, and optimization error. Discrete messages
-admit a value-interval certificate that preserves state-dependent
-action gaps and bounds their discounted occupation. It requires
-neither action curvature nor the true value function. A 74-state
-queue-and-inventory example gives a rational loss enclosure for
-a declared uncertainty box. Two lower bounds identify limits:
-omitting tagged rank causes positive minimax loss with known
-primitives, while calibration at a replacement boundary has a sharp
-inverse-square-root duration rate. A separate two-quote experiment
-gives a statistical certificate for an exponential fill curve.
-Hybrid margins, finite-book truncation, shutdown thresholds,
-and information-value ceilings receive explicit assumptions.
-The guarantees are conditional on specified models and uncertainty
-sets. Synthetic examples independently check partial-fill laws,
-cancellation values, controlled policies, and the resulting bounds.
+A market maker chooses prices and messages using an uncertain law of fills,
+queue movements and post-fill price changes. This paper connects errors in
+that law to the value of a deployed quoting policy. A marked-wealth identity
+separates spread capture, carried-inventory drift and simultaneous fill--price
+jumps. A finite event model retains tagged queue priority, partial fills,
+inventory reservations and orders that remain executable while cancellation
+is pending. A finite-stage latency approximation has an explicit leading
+value error and remainder.
+
+The control certificates account for primitive model errors, continuation
+values and numerical residuals. Smooth quote adjustments admit quadratic
+bounds; discrete messages require action gaps and state-dependent occupation
+bounds. A baseline-relative extension turns an enclosure of the current
+policy's value into a selective improvement rule. It changes a message only
+when its advantage is certified nonnegative throughout the uncertainty set,
+and supplies a computable lower bound on the resulting discounted gain.
+
+A marginal-coupling calculation gives a sharp participation interval when
+fill and price-jump dependence is unknown.
+A finite-message implementation layer encloses rounding and score errors,
+retains cancellation tails and states a joint-event calibration contract.
+The monograph's finite-sample interface transfers supported calibration
+uncertainty and compiled-policy error to the same objective.
+
+A continuing 74-state queue-and-inventory experiment verifies both loss and
+improvement certificates with rational outward enclosures and independent
+policy evaluation. Additional lower bounds show the cost of omitting tagged
+rank and the difficulty of calibration near a replacement boundary. These
+are conditional mathematical guarantees, supported by synthetic calculations;
+they do not establish empirical fill calibration or trading profitability.
 \end{abstract}
 \noindent\textbf{Keywords:} market making; adverse selection; marked point
 processes; queue priority; inventory control; model misspecification.
@@ -186,6 +191,15 @@ evaluated under a specified information class. Here the accounting
 needed for that comparison includes simultaneous fills and price jumps,
 and the stability calculation separates smooth offsets from discrete
 participation decisions.
+
+Section~\ref{sec:realisticquoting} organizes six practical modeling requirements, specifies a joint event-accounting boundary, and derives a sharp participation interval when fill and jump marginals are known but their dependence is not.
+
+\paragraph{Implementation extension.}
+Section~\ref{sec:productionquoting} completes the discrete implementation interface.
+Section~\ref{sec:deploymentcalibration} applies the monograph's finite-sample coverage,
+policy-transfer bounds and the supported-counterfactual evidence boundary.
+All new experiments are synthetic, and the new guarantees are conditional
+on the assumptions stated in those sections.
 
 \section{Wealth accounting with simultaneous fills and price jumps}
 
@@ -359,7 +373,7 @@ unchanged to exponential utility of wealth.
 
 \subsection{Existence, verification, and the policy loss identity}
 
-\begin{theorem}[Finite-state verification]\label{thm:verification}
+\begin{classical}[Finite-state verification]\label{thm:verification}
 Under Assumption~\ref{ass:finite}, the system
 \begin{equation}\label{eq:hjb}
 \partial_t h_x(t)+\max_{a\in\cAct_x}\HH_x(a;h(t))=0,
@@ -374,7 +388,7 @@ h_x(t)-J^\pi(t,x)=
 \left[\max_{a\in\cAct_{X_s}}\HH_{X_s}(a;h(s))
              -\HH_{X_s}(a_s;h(s))\right]\dd s .
 \end{equation}
-\end{theorem}
+\end{classical}
 \begin{proof}
 If the maximal total exit rate is \(K\), then
 \(\norm{L^a u-L^a v}_\infty\le2K\norm{u-v}_\infty\).
@@ -775,7 +789,7 @@ marked reward. The finite-horizon value satisfies
 \qquad h_x(T)=-\Phi_x.
 \end{equation}
 It has the verification and performance-difference identity of
-Theorem~\ref{thm:verification}. In particular, a proposed replacement
+Classical result~\ref{thm:verification}. In particular, a proposed replacement
 is compared with keeping the existing order through its entire
 post-message continuation value, including its new rank.
 \end{proposition}
@@ -785,7 +799,7 @@ For a fixed message choice, the clock contributes generator
 Thus its Hamiltonian is
 \(r_x^0+(L^0u)_x+\nu[u_{R_b(x)}-u_x-c_x(b)]\).
 The finite action menu and bounded coefficients satisfy the hypotheses
-of Theorem~\ref{thm:verification}. Taking the maximum over the menu
+of Classical result~\ref{thm:verification}. Taking the maximum over the menu
 gives \eqref{eq:replacementhjb}, and the same Dynkin argument gives
 the performance identity.
 \end{proof}
@@ -1159,7 +1173,7 @@ g(\delta)=\lambda_u\delta e^{-\kappa\delta}
 This is a static component of a quoting objective; it is not a theorem
 that the entire dynamic inventory book should be shut down.
 
-\begin{theorem}[Unbounded-offset threshold]\label{thm:shutdown}
+\begin{proposition}[Unbounded-offset gross-markout threshold]\label{thm:shutdown}
 For the objective \eqref{eq:shutdownreward} on \(\delta\ge0\):
 \begin{enumerate}
 \item If \(k\ge\kappa\), some finite offset has strictly positive
@@ -1173,7 +1187,7 @@ only if
 At equality the only zero at finite offset is
 \(\delta=1/(\kappa-k)\).
 \end{enumerate}
-\end{theorem}
+\end{proposition}
 \begin{proof}
 Multiplication by \(e^{k\delta}\) shows that \(g(\delta)>0\) is equivalent
 to
@@ -1204,7 +1218,7 @@ withdrawal may be mandatory independently of these profitability
 comparisons. A fill that reduces a sufficiently costly inventory can also
 have positive continuation value despite a negative immediate markout.
 
-\begin{example}[Threshold arithmetic]
+\begin{example}[Threshold arithmetic]\label{ex:shutdown}
 With \(\lambda_u=10,\kappa=2,k=1\), the threshold is
 \(10/e\approx3.678794\), attained at \(\delta=1\).
 At \(\lambda_i=10/e\), the two terms of \(g(1)\) both equal
@@ -1214,20 +1228,21 @@ criterion.
 \end{example}
 
 Figure~\ref{fig:shutdown} makes the phase boundary in
-Theorem~\ref{thm:shutdown} explicit.
+Proposition~\ref{thm:shutdown} explicit.
 
 \begin{figure}[tbp]
 \centering
 \includegraphics[width=\linewidth]{figures/02_shutdown_threshold.png}
-\caption{Exact gross-profit shutdown geometry. Panel (a) plots
-\(g(\delta)\) for \(\lambda_u=2\), \(\kappa=1.2\), \(k=1\), and informed
-intensities equal to one half, exactly, and one and a half times the
-critical value. At equality the maximum is zero at
-\(\delta=1/(\kappa-k)=5\). Panel (b) plots
-\(\lambda_i^*=k\lambda_u/[e(\kappa-k)]\); the red point is the threshold
-\(10/e\) from the arithmetic example. The shaded regions indicate whether
-some finite offset has positive gross markout under the stated static
-criterion.}
+\caption{Exact gross-markout geometry. Panel~(a) plots $g(\delta)$ for
+$\lambda_u=2$, $\kappa=1.2$, $k=1$, and informed intensities equal to one half,
+exactly, and one and a half times $\lambda_i^*=10/e$; at equality the maximum is
+zero at $\delta=1/(\kappa-k)=5$. Panel~(b) plots
+$\lambda_i^*=k\lambda_u/[e(\kappa-k)]$ for $\lambda_u=2$, $k=1$. Its red point,
+at $\kappa-k=0.2$, has $\lambda_i^*=10/e$, which coincides numerically with the
+threshold of Example~\ref{ex:shutdown} (there $\lambda_u=10$, $\kappa-k=1$).
+Shading indicates whether some finite offset has positive gross markout under
+the static criterion of Proposition~\ref{thm:shutdown}.}
+
 \label{fig:shutdown}
 \end{figure}
 
@@ -1628,7 +1643,7 @@ gives, with \(d=a^\ast-\widetilde a\),
 \le\frac{(b_1+\chi_x)^2}{2m_x^-}.
 \]
 Here \(n^\top d\le0\) removes the normal component. Apply
-Theorem~\ref{thm:verification} and then bound its occupation average
+Classical result~\ref{thm:verification} and then bound its occupation average
 by the maximum over states to obtain \eqref{eq:computedcertificate}.
 \end{proof}
 
@@ -1803,6 +1818,8 @@ occur among the four corners. Using this expression preserves
 the fact that the same event rate multiplies both the mark and
 the continuation difference.
 
+
+\input{sections/certified_policy_improvement.tex}
 
 \section{Hybrid actions and the cost of a small decision margin}
 
@@ -2216,7 +2233,7 @@ it is not a statement about cumulative online learning regret.
 
 \subsection{A bounded reward}
 
-\begin{theorem}[Value of a signal]\label{thm:information}
+\begin{classical}[Value of a signal]\label{thm:information}
 Let \(\vartheta\) be a state and \(Y\) a signal on standard Borel spaces,
 and let \(r(a,\vartheta)\) be a
 measurable one-decision reward with global range at most \(\Delta\).
@@ -2230,7 +2247,7 @@ selectors. Then the value of observing \(Y\) obeys
 \le\Delta\sqrt{I(\vartheta;Y)/2}.
 \]
 Information is measured in nats.
-\end{theorem}
+\end{classical}
 \begin{proof}
 Write \(f_y(a)=\E[r(a,\vartheta)\mid Y=y]\) and
 \(f(a)=\E r(a,\vartheta)\). The elementary inequality
@@ -2311,7 +2328,7 @@ moment condition and the units of signal value.
 A reward of range \(\Delta\) has
 \(\psi(s)=\Delta^2s^2/8\), so
 \(\psi^\dagger(t)=\Delta\sqrt{t/2}\), recovering
-Theorem~\ref{thm:information}. If instead \(\sigma,b>0\) and
+Classical result~\ref{thm:information}. If instead \(\sigma,b>0\) and
 \(\psi(s)=\sigma^2s^2/2\) is valid only on \(0\le s<1/b\), then
 \[
 \psi^\dagger(t)=
@@ -2407,9 +2424,19 @@ Absolute identity discrepancy&\(1.3\times10^{-9}\)\\
 \end{tabular}
 \end{center}
 
-For this separable exponential Hamiltonian, the minimum curvature over
-an active offset interval occurs at its upper endpoint whenever the
-Hamiltonian is strongly concave throughout that interval. The check
+For one active side, $-R''(\delta)=\Lambda_0e^{-\kappa\delta}\kappa\{2-\kappa(\delta-p)\}$
+by Proposition~\ref{prop:quote}. On $[0.15,1]$ it is positive exactly when
+$p>1-2/\kappa$, and then both factors decrease in $\delta$, so the curvature
+modulus is attained at $\delta=1$. With $\kappa=1.2$ the condition is
+$p>-2/3$. The script evaluates it for both sides at every recorded time node and
+admissible inventory-side pair; the smallest recorded margin $p+2/\kappa-1$ is \input{tables/curvature_margin.tex}. At a state
+where the condition failed, Theorem~\ref{thm:dynamiccertificate} would not apply and the local gap would
+instead be bounded by Proposition~\ref{prop:switch}.
+
+The recorded minimum is a numerical node check; it does not alone enclose
+the solution between nodes. The complete-interval residual enclosure in
+the next subsection is a separate certified calculation.
+ The check
 uses this endpoint formula at each evaluated time and state. Numerical
 quadrature of the bound is not a formal interval-arithmetic certificate;
 the purpose is to test the performance identity and its implementation
@@ -2791,6 +2818,12 @@ rational arithmetic; the reported matrix values are floating-point
 evaluations of the declared synthetic model.
 
 
+\input{sections/realistic_trading.tex}
+
+\input{sections/production_quoting.tex}
+
+\input{sections/calibration_bridge.tex}
+
 \section{Scope and consequences}
 
 The accounting identity applies to general admissible semimartingales.
@@ -2840,10 +2873,13 @@ supplies a positive learning guarantee for a specified exponential cell,
 including an unknown intensity scale. Discounting removes the terminal
 horizon while retaining dependence on an effective horizon and the
 curvature modulus. The signal-value extension replaces bounded losses
-by a uniform centered moment condition. None of these results
-supplies a fitted market model or a statistical confidence set without
-the additional data and inference assumptions that such a set requires.
+by a uniform centered moment condition. The production extension adds compiled-score error bounds and applies
+the monograph's simultaneous finite-sample construction under explicit
+independent row-sampling assumptions. These bounds account separately for model error and implemented
+action loss. They do not identify a market fill law from unsupported actions
+or validate independent sampling for dependent exchange observations.
 
+\setlength{\bibsep}{3pt plus 0.5pt minus 0.5pt}
 \bibliographystyle{plainnat}
 \bibliography{references}
 \end{document}

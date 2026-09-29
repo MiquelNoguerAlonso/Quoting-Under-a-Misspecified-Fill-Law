@@ -1,0 +1,15 @@
+*.aux
+*.fdb_latexmk
+*.fls
+*.out
+*.toc
+*.blg
+__pycache__/
+*.pyc
+main.pdf
+p2_quoting.pdf
+p3_forecast.pdf
+/main.log
+/paper.log
+/p2_quoting.log
+/p3_forecast.log

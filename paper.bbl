@@ -1,4 +1,4 @@
-\begin{thebibliography}{16}
+\begin{thebibliography}{23}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -17,6 +17,14 @@ Marco Avellaneda and Sasha Stoikov.
 \newblock High-frequency trading in a limit order book.
 \newblock \emph{Quantitative Finance}, 8\penalty0 (3):\penalty0 217--224, 2008.
 \newblock \doi{10.1080/14697680701381228}.
+
+\bibitem[Bacry et~al.(2015)Bacry, Mastromatteo, and Muzy]{DeployBacry2015}
+Emmanuel Bacry, Iacopo Mastromatteo, and Jean-Fran{\c c}ois Muzy.
+\newblock Hawkes processes in finance.
+\newblock \emph{Market Microstructure and Liquidity}, 1\penalty0 (1):\penalty0
+  1550005, 2015.
+\newblock \doi{10.1142/S2382626615500057}.
+\newblock URL \url{https://arxiv.org/abs/1502.04592}.
 
 \bibitem[Cao et~al.(2026)Cao, {\v{S}}i{\v{s}}ka, Szpruch, and
   Treetanthiploet]{CaoEtAl2026}
@@ -52,6 +60,15 @@ Rama Cont, Sasha Stoikov, and Rishi Talreja.
 Thomas~M. Cover and Joy~A. Thomas.
 \newblock \emph{Elements of Information Theory}.
 \newblock Wiley, 2 edition, 2006.
+
+\bibitem[Ghavamzadeh et~al.(2016)Ghavamzadeh, Petrik, and
+  Chow]{GhavamzadehPetrikChow2016}
+Mohammad Ghavamzadeh, Marek Petrik, and Yinlam Chow.
+\newblock Safe policy improvement by minimizing robust baseline regret.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~29, 2016.
+\newblock URL
+  \url{https://proceedings.neurips.cc/paper/2016/hash/9a3d458322d70046f63dfd8b0153ece4-Abstract.html}.
 
 \bibitem[Glosten and Milgrom(1985)]{GlostenMilgrom1985}
 Lawrence~R. Glosten and Paul~R. Milgrom.
@@ -106,11 +123,49 @@ Charles-Albert Lehalle and Othmane Mounjid.
   1750009, 2017.
 \newblock \doi{10.1142/S2382626617500095}.
 
+\bibitem[{Nasdaq}(2026{\natexlab{a}})]{DeployITCH}
+{Nasdaq}.
+\newblock {TotalView-ITCH} 5.0 interface specification, 2026{\natexlab{a}}.
+\newblock URL
+  \url{https://www.nasdaqtrader.com/content/technicalsupport/specifications/dataproducts/NQTVITCHSpecification.pdf}.
+\newblock Protocol reference, accessed 28 September 2026.
+
+\bibitem[{Nasdaq}(2026{\natexlab{b}})]{DeployOUCH}
+{Nasdaq}.
+\newblock {OUCH} 5.0 order entry protocol, 2026{\natexlab{b}}.
+\newblock URL
+  \url{https://www.nasdaqtrader.com/content/technicalsupport/specifications/TradingProducts/OUCH5.0.pdf}.
+\newblock Protocol reference, accessed 28 September 2026.
+
+\bibitem[{New York Stock Exchange}(2026)]{DeployNYSE}
+{New York Stock Exchange}.
+\newblock {NYSE} parity frequently asked questions, 2026.
+\newblock URL \url{https://www.nyse.com/publicdocs/nyse/NYSE_Parity_FAQs.pdf}.
+\newblock Allocation reference, accessed 28 September 2026.
+
 \bibitem[Noguer~Alonso(2026)]{NoguerAlonso2026Execution}
 Miquel Noguer~Alonso.
 \newblock The mathematics of market impact and order execution.
 \newblock Zenodo, 2026.
-\newblock URL \url{https://doi.org/10.5281/zenodo.22736805}.
+\newblock URL \url{https://doi.org/10.5281/zenodo.23027593}.
+
+\bibitem[Rodriguez~Dominguez(2026{\natexlab{a}})]{RodriguezDominguez2026Market}
+Alejandro Rodriguez~Dominguez.
+\newblock The market's conditioning representation: Equilibrium, crowding, and
+  convention multiplicity.
+\newblock \emph{arXiv preprint arXiv:2608.18299}, 2026{\natexlab{a}}.
+\newblock \doi{10.48550/arXiv.2608.18299}.
+\newblock URL \url{https://arxiv.org/abs/2608.18299}.
+\newblock Version 1, submitted 18 August 2026.
+
+\bibitem[Rodriguez~Dominguez(2026{\natexlab{b}})]{RodriguezDominguez2026Switching}
+Alejandro Rodriguez~Dominguez.
+\newblock Switching frictions, heterogeneous trading horizons, and long-memory
+  order flow.
+\newblock \emph{arXiv preprint arXiv:2609.02525}, 2026{\natexlab{b}}.
+\newblock \doi{10.48550/arXiv.2609.02525}.
+\newblock URL \url{https://arxiv.org/abs/2609.02525}.
+\newblock Version 1, submitted 2 September 2026.
 
 \bibitem[Russo and Zou(2016)]{RussoZou2016}
 Daniel Russo and James Zou.
