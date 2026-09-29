@@ -1,0 +1,154 @@
+\section{Beyond a distance-only fill law}
+\label{sec:realisticquoting}
+
+A dealer HJB is an optimization equation, not a unique specification of
+market behavior. The omitted mechanisms belong to a particular state,
+event law and objective. The original Avellaneda--Stoikov model uses
+exponential utility, not merely a quadratic inventory penalty
+\citep{AvellanedaStoikov2008}. A formula involving \(1/k\) comes from a
+particular exponential intensity cell; it is not a universal competitive
+spread. For example, maximizing
+\(Ae^{-k\delta}(\delta-c)\) gives the unconstrained interior condition
+\(\delta=c+1/k\) only when the continuation-adjusted charge \(c\) is held
+fixed and the quote is continuous. Tick constraints, endogenous marks,
+queue resets and competitors can change that calculation.
+
+\subsection{The six requirements for a continuing quote}
+The modelling requirements of \citet[Section~37.1]{NoguerAlonso2026Execution} take a
+specific form here. \emph{Fill law}: tagged rank, partial fills, reservations
+and pending cancellation are explicit in Sections~3.3, 3.5 and~3.7; venue
+priority rules and the joint law of feed and order latency are not.
+\emph{Information}: the marked-wealth charge \eqref{eq:jointmarkedcharge} must use the joint law of fill
+and price mark, and Proposition~\ref{prop:filljumpfrechet} shows exactly what
+is lost when only its marginals are known. \emph{Objective}: the certificates
+concern the additive marked-wealth objective; drawdown, VaR or Sharpe criteria
+need a wealth-and-peak state or a separate formulation, and an adaptive
+mean--variance criterion needs a precommitment or equilibrium interpretation.
+Impact and liquidity, competition and evaluation carry over as stated there; a
+reduced-form response to rival depth is not a Nash equilibrium, and a replay
+that holds the historical book fixed cannot validate the book's response to a
+different quoting policy.
+
+\subsection{One event, one marked-wealth charge}
+
+Let a joint event mark contain executed quantity \(\xi\) (positive for a
+buy), execution price \(P\), the reference-price jump \(J\), cash fee
+\(f\) (negative for a rebate), and any queue or message update. With
+pre-event inventory \(q\) and reference \(S\), the exact wealth increment is
+\begin{equation}\label{eq:jointmarkedcharge}
+ \Delta W=\xi(S-P)+(q+\xi)J-f.
+\end{equation}
+Indeed cash changes by \(-\xi P-f\), and marked inventory changes from
+\(qS\) to \((q+\xi)(S+J)\). Thus a finite-activity event kernel
+\(\nu_t(\dd z\mid x,a)\), a between-event reward rate \(r_0\), and a
+between-event generator \(\mathcal L_0\) give the schematic HJB
+\begin{equation}\label{eq:jointmarkedhjb}
+0=\partial_t v+\sup_{a\in\mathcal A_t(x)}
+ \left\{r_0+\mathcal L_0v+
+ \int[\Delta W(x,a,z)+v(t,F(x,a,z))-v(t,x)]
+          \nu_t(\dd z\mid x,a)\right\}.
+\end{equation}
+Here \(v\) values \emph{future increments}, excluding already booked
+wealth; running penalties belong in \(r_0\). This convention prevents
+subtracting a fill markout twice. If a reward instead books a price mark
+at a future horizon, the overlapping continuation must be adjusted, or
+the state must retain the outstanding markout obligation. The shared
+Bellman step requires a consistent accounting boundary.
+
+\subsection{Sharp ambiguity from missing fill--jump dependence}
+
+Consider one ask quote at spread \(d\), initial inventory zero, no
+continuation or terminal inventory penalty, and a fee \(f\) per fill.
+Let \(X\in\{0,1\}\) indicate its fill and \(J=hY\), where
+\(Y\in\{0,1\}\), \(h>0\), is a simultaneous upward price jump. A
+nonparticipating dealer earns zero in this cell. Its quoting gain is
+\[
+ G=\E[X(d-f-hY)].
+\]
+The endpoint liquidation convention is marked wealth, not cost-free
+future liquidation. It is deliberately the same for both actions.
+
+\begin{proposition}[A sharp marginal-only quoting interval]
+\label{prop:filljumpfrechet}
+If \(\Pr(X=1)=p\) and \(\Pr(Y=1)=q\), but their dependence is unknown,
+then the exact set of possible quoting gains is
+\begin{equation}\label{eq:frechetquoting}
+ \left[p(d-f)-h\min(p,q),\quad
+ p(d-f)-h\max(0,p+q-1)\right].
+\end{equation}
+Independence selects the single value \(p(d-f)-hpq\). A nonnegative
+lower endpoint is necessary and sufficient for this quote to weakly
+improve on nonparticipation for every joint law with these marginals.
+\end{proposition}
+\begin{proof}
+Write \(z=\Pr(X=1,Y=1)\). The four cell probabilities are
+\(z,p-z,q-z,1-p-q+z\). Their nonnegativity is equivalent to
+\(\max(0,p+q-1)\le z\le\min(p,q)\). Every point in this interval is a
+joint law, and gain is the decreasing affine function
+\(p(d-f)-hz\). Its endpoint values give the interval and the comparison
+with zero.
+\end{proof}
+
+The argument is the two-point marginal-coupling calculation of
+\citet[Proposition~37.1]{NoguerAlonso2026Execution}; the proposition records its
+market-making instance, in which the participation decision rather than a
+routing decision is reversed.
+
+Take \(p=0.40\), \(q=0.25\), \(d=1\), \(f=0\), \(h=2\), in tick
+units. Independent marginals suggest a gain of \(0.20\) ticks per
+opportunity. The admissible joint law with all upward jumps occurring
+at fills has gain \(-0.10\). Fill probability and unconditional jump
+probability are identical. Their full ambiguity interval is
+\([-0.10,0.40]\). With probability \(0.10+0.15\theta\) assigned to the
+joint fill/jump event, gain is \(0.20-0.30\theta\): the quote becomes
+unprofitable once \(\theta>2/3\).
+
+\begin{table}[htbp]
+\centering\small
+\caption{Dependence changes participation despite fixed marginal fill and
+jump probabilities. Values are synthetic ticks per opportunity.}
+\begin{tabular}{lrr}
+\toprule
+Law & Quoting gain & Selected action\\
+\midrule
+\inputtable{tables/realism_rows.tex}
+\bottomrule
+\end{tabular}
+\end{table}
+
+For partial fills and several marks, a finite coupling matrix gives the
+same kind of exact stage calculation. Given marginal weights \(p_i,q_j\)
+and a continuation-aware event gain \(g_{ij}\), its worst expectation is
+\begin{equation}\label{eq:marktransport}
+ \min_{\pi\ge0}\sum_{ij}\pi_{ij}g_{ij},\qquad
+ \sum_j\pi_{ij}=p_i,\quad \sum_i\pi_{ij}=q_j.
+\end{equation}
+The event destinations and continuation enclosure must be included in
+\(g_{ij}\); optimizing only instantaneous spread is insufficient. This is
+a finite marginal-coupling linear program, not a new solution of the
+full dealer game. To feed a stage bound into
+Section~\ref{sec:baselinequoting}, retain the same underlying model in
+candidate and baseline advantages. Independent minimization of their
+values can discard cancellation of common uncertainty.
+
+The script \texttt{verification/realism\_stress.py} checks the interval
+against independent linear programs over a probability grid, including
+degenerate marginals, and verifies the mixture switch. These exact toy
+laws demonstrate an identification obstruction; they are not inferred
+from market observations.
+
+\subsection{What would make the added realism measurable?}
+
+The evaluation unit should be an order/message episode with observable
+queue history, submitted size, executions, cancel acknowledgements and
+price marks at preregistered horizons. Preserve causality using receipt
+times available to the agent. Split by time and keep overlapping marks
+within the same partition. Estimate partial-fill distributions and the
+joint fill/mark law conditional on rank, size, latency and regime, with
+uncertainty increasing where action support is sparse. Compare a frozen
+baseline with the same net fee and terminal inventory accounting.
+Report net marked reward, inventory and drawdown tails, stale-quote
+exposure, fill calibration and certificate coverage. An ablation that
+adds each variable separately should be accompanied by combined latency,
+toxicity and competitor-response stress. Neither a positive simulated
+spread nor a narrow in-model interval supplies empirical profitability.

@@ -1,1 +1,25 @@
-% Calibration and implementation bounds.
+\section{Calibration, implementation error, and the evidence boundary}\label{sec:deploymentcalibration}
+The deployment interface is the one stated and proved in
+\citet[Section~39]{NoguerAlonso2026Execution}. With a common initial law, observation class, feasible masks and terminal
+reward error at most $\eta_N$, suppose the fitted rewards and next-state
+kernels satisfy $\lvert r_k-\widehat r_k\rvert\le\eta_k$ and
+$\mathrm{TV}(P_k^a,\widehat P_k^a)\le\epsilon_k$ uniformly over feasible states
+and messages, and $S_k$ bounds the span of fitted continuation values. Then, with
+$B_N=\eta_N$ and $B_k=B_{k+1}+\eta_k+\epsilon_kS_{k+1}$ every common feasible
+policy has $\lvert J-\widehat J\rvert\le B_0$, and a compiled policy with fitted
+action gaps $\zeta_k$ loses at most $2B_0+\widehat{\mathbb E}\sum_k\zeta_k$
+\citep[Theorem~39.1]{NoguerAlonso2026Execution}. For prespecified state--action rows with
+independent draws, simultaneous radii follow from
+\citet[Proposition~39.2]{NoguerAlonso2026Execution}.
+
+Here the reward includes the marked fill charge \eqref{eq:jointmarkedcharge}, and the kernel includes
+tagged-rank transitions and pending-cancel states. Theorems~\ref{thm:intervalcontrol} and~\ref{thm:baselinequoting} are the
+discounted analogues and use value enclosures over a parameter box $\Theta$
+rather than per-row radii. The row radii can populate $\Theta$ only if the rows
+are the state--message pairs of the finite queue model and the independent
+sampling assumption holds; a single dependent message stream does not satisfy
+it without a martingale, mixing or block argument. Replay and off-policy
+evaluation need the support, invariance and unconfoundedness conditions of
+\citet[Section~39.4]{NoguerAlonso2026Execution}; Proposition~\ref{prop:coverage} is an instance of what
+fails without action coverage. Message conformance, measured latency, fee tiers
+and incident recovery remain external evidence requirements.
