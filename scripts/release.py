@@ -57,7 +57,7 @@ def verify():
     assert {p.relative_to(ROOT).as_posix() for p in entries}=={p.relative_to(ROOT).as_posix() for p in release_files()},'Inventory coverage mismatch'
     if not (ROOT/'upload_manifest.json').exists():
         _,source=configuration()
-        assert (ROOT/'paper.tex').read_text().strip().endswith('\input{'+source+'}')
+        assert (ROOT/'paper.tex').read_text().strip().endswith('\\input{'+source+'}')
         print(f'Verified {len(entries)} delivered source files and canonical entry point.')
         return
     meta=json.loads((ROOT/'upload_manifest.json').read_text())
@@ -74,7 +74,7 @@ def verify():
             assert set(z.namelist())=={p.name for p in wanted}
             for p in wanted:assert z.read(p.name)==p.read_bytes(),p.name
     _,main=configuration()
-    assert (ROOT/'paper.tex').read_text().strip().endswith('\input{'+main+'}')
+    assert (ROOT/'paper.tex').read_text().strip().endswith('\\input{'+main+'}')
     print(f'Verified {len(entries)} files, canonical entry point, PDF hash and every archive member.')
 
 
@@ -86,7 +86,7 @@ def main():
     if args.build:
         subprocess.run(['latexmk','-pdf','-interaction=nonstopmode','-halt-on-error',source],cwd=ROOT,check=True)
         log=(ROOT/(stem+'.log')).read_text(errors='replace')
-        forbidden=['undefined references','undefined citations','multiply defined','Overfull \hbox','Overfull \vbox']
+        forbidden=['undefined references','undefined citations','multiply defined','Overfull \\hbox','Overfull \\vbox']
         assert not any(s in log for s in forbidden),'Unresolved references or overfull boxes; inspect build log'
         shutil.copyfile(ROOT/(stem+'.pdf'),ROOT/'paper.pdf')
         if (ROOT/(stem+'.bbl')).exists():shutil.copyfile(ROOT/(stem+'.bbl'),ROOT/'paper.bbl')
