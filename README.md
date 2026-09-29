@@ -12,7 +12,7 @@ tables, mathematical verification scripts and computational results are included
 ## Reproduce
 
 ```bash
-python -m pip install -r requirements.txt
+python -m pip install -r verification/requirements.txt
 python scripts/release.py --check
 python verification/verify_theory.py
 python verification/certified_improvement.py
